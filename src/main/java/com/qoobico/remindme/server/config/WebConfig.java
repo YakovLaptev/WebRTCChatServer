@@ -1,6 +1,5 @@
 package com.qoobico.remindme.server.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -17,12 +16,27 @@ import java.util.List;
 @ComponentScan("com.qoobico.remindme.server")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Override
+/*    @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(new ObjectMapper());
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         converters.add(converter);
+    }*/
+
+   /* @Override
+    public void configureMessageConverters(
+            List<HttpMessageConverter<?>> converters) {
+        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+        converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
+    }
+*/
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
+        converters.add(converter);
+        super.configureMessageConverters(converters);
     }
 }

@@ -1,5 +1,6 @@
 package com.qoobico.remindme.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -32,6 +33,10 @@ public class Event extends ModelBase{
             inverseJoinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) })
     @JsonManagedReference
     private List<User> users = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "event")
+    @JsonBackReference
+    private List<Request> requests = new ArrayList<>();
 
     public Event() {}
 

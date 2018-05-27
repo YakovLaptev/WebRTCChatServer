@@ -10,10 +10,10 @@ import java.util.List;
 @Table(name = "user")
 public class User extends ModelBase{
 
-    @Column(name = "email", nullable = false, length = 50)
+    @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", length = 50)
     private String name;
 
     @Column(name = "avatar", length = 50)
@@ -29,6 +29,10 @@ public class User extends ModelBase{
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     @JsonBackReference
     private List<Event> events = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonBackReference
+    private List<Request> myRequests = new ArrayList<>();
 
     public User() {}
 
@@ -68,15 +72,23 @@ public class User extends ModelBase{
         return myEvents;
     }
 
-    public void setMyEvents(List<Event> myEvents) {
-        this.myEvents = myEvents;
-    }
-
     public List<Event> getEvents() {
         return events;
     }
 
+    public void setMyEvents(List<Event> myEvents) {
+        this.myEvents = myEvents;
+    }
+
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public List<Request> getMyRequests() {
+        return myRequests;
+    }
+
+    public void setMyRequests(List<Request> myRequests) {
+        this.myRequests = myRequests;
     }
 }

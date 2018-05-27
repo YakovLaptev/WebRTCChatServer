@@ -1,5 +1,7 @@
 package com.qoobico.remindme.server.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,16 +10,16 @@ import java.io.Serializable;
 public abstract class ModelBase implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private long id;
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
