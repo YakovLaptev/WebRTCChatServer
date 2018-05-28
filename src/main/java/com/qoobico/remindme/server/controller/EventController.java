@@ -55,11 +55,13 @@ public class EventController {
 
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     @ResponseBody
-    public Event saveEvent(@RequestBody EventDTO EventDTO) {
+    public Event saveEvent(@RequestBody EventDTO eventDTO) {
         ModelMapper modelMapper = new ModelMapper();
         List<User> users = new ArrayList<>();
-        Event event = modelMapper.map(EventDTO, Event.class);
-        users.add(event.getCreator());
+        Event event = modelMapper.map(eventDTO, Event.class);
+        event.setCreator(user_service.getByID(eventDTO.getCreator()));
+        users.add(user_service.getByID(eventDTO.getCreator()));
+        event.setUsers(users);
         return service.save(event);
     }
 

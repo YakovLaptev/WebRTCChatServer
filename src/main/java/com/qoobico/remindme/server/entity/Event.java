@@ -19,7 +19,7 @@ public class Event extends ModelBase{
     private String about;
 
     @Column(name = "date", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)

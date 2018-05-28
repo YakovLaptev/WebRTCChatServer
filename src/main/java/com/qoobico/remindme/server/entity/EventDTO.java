@@ -4,25 +4,15 @@ import java.util.Date;
 
 public class EventDTO {
 
-    private long id;
-
     private String name;
 
     private String about;
 
     private Date date;
 
-    private User creator;
+    private Long creator;
 
     public EventDTO() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -49,11 +39,11 @@ public class EventDTO {
         this.date = date;
     }
 
-    public User getCreator() {
+    public Long getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(Long creator) {
         this.creator = creator;
     }
 }
